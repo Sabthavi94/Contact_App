@@ -1,12 +1,43 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import AddNewContactScreen from './screens/AddNewContactScreen';
+import EditContactScreen from './screens/EditContactScreen';
+import ViewContactScreen from './screens/ViewContactScreen';
+import { HeaderBackButton } from '@react-navigation/stack';
 
-export default function App() {
+
+const Stack = createStackNavigator();
+
+export default class App extends React.Component {
+  
+  render(){
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator 
+      initialRouteName="Home" 
+      screenOptions={{
+        headerTintColor:"#fff",
+        headerStyle:{
+          backgroundColor:"#b83227"
+        },
+        headerTitleStyle:{
+          color:"#fff"
+        }
+      }}
+      >
+        <Stack.Screen name="Home" component={HomeScreen} options={{title:"Contact App"}} />
+        <Stack.Screen name="AddNewContact" component={AddNewContactScreen} options={{title:"Contact App" }} />
+        <Stack.Screen name="EditContact" component={EditContactScreen} options={{title:"Edit Contact"}} />
+        <Stack.Screen name="ViewContact" component={ViewContactScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
+}
 }
 
 const styles = StyleSheet.create({
@@ -15,5 +46,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
 });
